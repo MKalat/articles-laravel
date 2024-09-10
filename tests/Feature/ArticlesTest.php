@@ -115,4 +115,46 @@ class ArticlesTest extends TestCase
         $response
         ->assertJsonFragment(['id' => $article->id]);
     }
+
+    public function test_if_can_delete_article_UnAuthUser(): void
+    {
+        $user = User::factory()->create();
+
+        $article = Articles::factory()->create([
+            'title' => 'test',
+            'body' => 'testing body',
+            'publication_date' => now(),
+            'user_id' => $user->id,
+
+        ]);
+
+        $response = $this->deleteJson('/api/article', ['id' => $article->id], ['Content-Type' => 'application/json']);
+
+        $response
+        ->assertStatus(403);
+    }
+
+    public function test_if_can_put_article_UnAuthUser(): void
+    {
+        $user = User::factory()->create();
+
+        $article = Articles::factory()->create([
+            'title' => 'test',
+            'body' => 'testing body',
+            'publication_date' => now(),
+            'user_id' => $user->id,
+
+        ]);
+
+        $response = $this->putJson('/api/article', [
+        'id' => $article->id,
+        'title' => 'apitest title 1',
+        'body' => 'api test body 1',
+        'publication_date' => now()
+        ],
+        ['Content-Type' => 'application/json']);
+
+        $response
+        ->assertStatus(403);
+    }
 }

@@ -21,7 +21,6 @@ class ArticlesFactory extends Factory
             'body' => fake()->text(),
             'publication_date' => now(),
             'user_id' => null,
-
         ];
     }
 }

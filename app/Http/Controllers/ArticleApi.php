@@ -45,7 +45,7 @@ class ArticleApi extends Controller
             $article->title = $data['title'];
             $article->body = $data['body'];
             $article->publication_date = $data['publication_date'];
-            $article->user = Auth::user();
+            $article->user()->associate(Auth::user());
             $article->save();
             return new JsonResponse(['result' => $article],200);
         } else {

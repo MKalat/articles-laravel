@@ -13,7 +13,6 @@ class Article extends Model
         'title',
         'body',
         'publication_date',
-        'user',
     ];
 
     public function user(): BelongsTo

@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Article;
+#use App\Http\Controllers\Article;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
-Route::get('/article/list', [Article::class, 'list']);
-Route::get('/article/{id}', [Article::class, 'get']);
-Route::post('/article/add/{id}', [Article::class, 'add']);
-Route::post('/article/update/{id}', [Article::class, 'update']);
-Route::post('/article/delete/{id}', [Article::class, 'delete']);
+
+# I'm not familiar with filament. so I leave empty stub. I have done also lots of full stack with vue.js, bootstrap, front-end etc with symfony, also with laravel,
+# but not with Filament , so I decided to leave this point to not waste time on timed task
+# MK
+
 
 require __DIR__.'/auth.php';

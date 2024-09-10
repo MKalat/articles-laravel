@@ -34,7 +34,8 @@ class ArticleApi extends Controller
 
         $rules = [
             'title' => 'required|max:255',
-            'body' => 'required'
+            'body' => 'required',
+            'publication_date' => 'required'
         ];
 
         $validator = Validator::make($data, $rules);
@@ -43,6 +44,7 @@ class ArticleApi extends Controller
             $article = new ModelsArticle;
             $article->title = $data['title'];
             $article->body = $data['body'];
+            $article->publication_date = $data['publication_date'];
             $article->user = Auth::user();
             $article->save();
             return new JsonResponse(['result' => $article],200);
@@ -74,6 +76,7 @@ class ArticleApi extends Controller
             'id' => 'required|unique:article',
             'title' => 'required|max:255',
             'body' => 'required',
+            'publication_date' => 'required',
         ];
 
         $validator = Validator::make($data, $rules);
@@ -83,6 +86,7 @@ class ArticleApi extends Controller
             $article->update([
                 'title' => $data['titla'],
                 'body' => $data['body'],
+                'publication_date' => $data['publication_date'],
             ]);
             return new JsonResponse(['result' => $article],200);
         } else {

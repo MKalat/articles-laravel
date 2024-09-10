@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->timestamp('publication_date');
-            $table->foreignId('user_id')->nullable()->index();
+            $table->timestamp('publication_date')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

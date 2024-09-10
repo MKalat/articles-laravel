@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Article;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,9 +24,10 @@ class UserIsAuthor
         }
 
         $user = Auth::user();
-        $articleId = $request->id;
-        $userOfArticle = Article::find($articleId)->user;
-        if ($user->id == $userOfArticle->id){
+        $articleId = $request->input('id');
+
+        $article = User::find($user->id)->articles()->where('id', '=', $articleId);
+        if ($article){
             return $next($request);
         }
 

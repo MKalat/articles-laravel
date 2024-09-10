@@ -157,4 +157,19 @@ class ArticlesTest extends TestCase
         $response
         ->assertStatus(403);
     }
+
+    public function test_if_can_post_article_UnAuthUser(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->postJson('/api/article', [
+        'title' => 'apitest title',
+        'body' => 'api test body',
+        'publication_date' => now()
+        ],
+        ['Content-Type' => 'application/json']);
+
+        $response
+        ->assertStatus(403);
+    }
 }
